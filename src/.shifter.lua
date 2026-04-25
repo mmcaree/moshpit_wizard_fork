@@ -7,24 +7,7 @@ local height = 200
 shifter = {}
 
 -- refactor: move to util?
-shifter.expand_cel_bounds =
-    function(
-        cel,
-        cel_width,
-        cel_height,
-        x_image_target,
-        y_image_target,
-        x_origin,
-        y_origin
-    )
-        -- todo: undoing this bound-extending is a pain. Need to find a way to do it better
-        local expanded_image = Image(cel_width, cel_height, cel.image.colorMode)
-        expanded_image:drawImage(cel.image, x_image_target, y_image_target)
-        cel.image = expanded_image
-        cel.position = Point(x_origin, y_origin) -- undoable action
-
-        return cel
-    end
+shifter.expand_cel_bounds = util.expand_cel_bounds
 
 --[[
     Returns a table of {row_amount} random indices of rows, non-duplicate 
